@@ -1,0 +1,13 @@
+Fofonso's Wumpus Hunt 2: The Hunt for the Wumpus Wizard
+
+-2 characters, the nameless hunter and the Mighty Wumpus Wizard (Older Brother of the original Wumpus)
+-Multiple levels/floors (50 or so)
+-High Resolution 256-color VGA graphics
+-Puzzler, each level is an individual puzzle, without correlation between levels apart from general locations
+-The Wumpus Wizard created all puzzles as traps protecting his lair.
+-The hunter bought exactly the number of arrows as levels or has a magic arrow that returns to him after being shot
+
+-Puzzles
+--Each floor is a logic puzzle with only one or two solutions
+--"     "    has a grid like structure, but can have different structures like walls and etc.
+--The solution can be reached by firing one single arrow, 
