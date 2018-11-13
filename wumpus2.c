@@ -25,76 +25,111 @@
 #include <conio.h>
 #include <io.h>
 
+#define True 1
+#define False 0
+
 #define STATE_GAME 0
 #define STATE_LEVEL_SELECT 1
 #define STATE_OPTIONS_MENU 2
 #define STATE_MAIN_MENU 3
 
-#define ENTITY_TYPE_ROCK 1;
+#define DIRECTION_UP 0
+#define DIRECTION_RIGHT 1
+#define DIRECTION_DOWN 2
+#define DIRECTION_LEFT 3
 
-#define ROCK_STATE_DEFAULT 0;
+#define OBJ_PLAYER 1
+#define OBJ_WALL 2
+#define OBJ_PUSHABLE 4
 
 int CURRENT_GAME_STATE = STATE_MAIN_MENU;
 int CURRENT_LEVEL = 0;
 
-int TIME_STATE = 0;
+int PLAYER_CONTROL = True;
 
-struct _Entity 
+int WAS_DIRECTIONAL_PRESSED = False;
+int WHAT_DIRECTIONAL_PRESSED = DIRECTION_UP;
+
+struct Object
 {
-    int type;
-    int posX;
-    int posY;
-    int state;
-    int anim_frame;
-} entity;
+	int x;
+	int y;
+	int flags;
+};
 
-#define ENTITY_LIST_SIZE 64;
-
-entity entity_list[ENTITY_LIST_SIZE];
-
-void update_logic()
-{
-    if(TIME_STATE >= 100)
-    {
-        TIME_STATE = 0;
-    }
-    else
-    {
-        TIME_STATE++;
-    }
-
-    for(int i = 0; i < ENTITY_LIST_SIZE; i++)
-    {
-        
-    }
-}
+Object PLAYER_OBJECT;
 
 void game_loop()
 {
-    update_logic();
+	if(ANIM_PLAYING == False)
+	{
+		if(PLAYER_CONTROL == True)
+		{
+		    handle_input();
+		}
 
-    handle_input();
-
-    update_physics();
+		update_logic();	
+	}
+	
 
     draw_background();
     draw_world();
-    draw_entities();
+    draw_objects();
     draw_hud();
 
     handle_audio();
+    wait_for_vblank();
+}
+
+void update_logic()
+{
+	Object object;
+
+	if(WAS_DIRECTIONAL_PRESSED == True)
+	{
+		object = adjacent_player(WHAT_DIRECTIONAL_PRESSED);
+		//Find out what is in the direction the player wanted to move
+
+		if(object != NULL)
+		{
+			if((object.flags & OBJ_PUSHABLE) != 0)
+			{
+				//IF OBJECT IS PUSHABLE, BEGIN PUSHING SAID OBJECT
+				start_move_object(object, WHAT_DIRECTIONAL_PRESSED);
+				start_move_object(PLAYER_OBJECT, WHAT_DIRECTIONAL_PRESSED);
+			
+			}
+			else if((object.flags & OBJ_WALL) != 0)
+			{
+				//LITERALLY NOTHING HAPPENS, MIGHT ADD A HUMPF NOISE EVENTUALLY, OR A TENTATIVE MOVE.
+			}
+		}
+		else
+		{
+			//IF object is NULL, it means that the path is clear, so the player can just move there.
+			start_move_object(PLAYER_OBJECT, WHAT_DIRECTIONAL_PRESSED);
+		}
+	}	
+}
+
+void init_game()
+{
+	PLAYER_OBJECT.x = 0;
+	PLAYER_OBJECT.y = 0;
+	PLAYER_OBJECT.flags |= OBJ_PLAYER;
 }
 
 void main_menu()
 {
     draw_menu_background();
     draw_menu_text();
-    check_input();
+    handle_input();
     if(enter_pressed)
     {
         if(current_choice == MENU_NEW_GAME)
         {
             CURRENT_GAME_STATE = STATE_GAME;
+            init_game();
         }
         else if (current_choice == MENU_LEVEL_SELECT)
         {
