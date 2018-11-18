@@ -49,6 +49,8 @@ int CURRENT_LEVEL = 0;
 
 int PLAYER_CONTROL = True;
 
+int GAME_RUNNING = True;
+
 int WAS_DIRECTIONAL_PRESSED = False;
 int WHAT_DIRECTIONAL_PRESSED = DIRECTION_UP;
 
@@ -61,18 +63,30 @@ struct Object
 
 Object PLAYER_OBJECT;
 
+void main_loop()
+{
+    if(CURRENT_GAME_STATE == STATE_GAME)
+    {
+        game_loop();
+    }
+    else if(CURRENT_GAME_STATE == STATE_MAIN_MENU)
+    {
+        main_menu();
+    }
+}
+
 void game_loop()
 {
-	if(ANIM_PLAYING == False)
-	{
-		if(PLAYER_CONTROL == True)
-		{
-		    handle_input();
-		}
+    if(ANIM_PLAYING == False)
+    {
+        if(PLAYER_CONTROL == True)
+        {
+            handle_input();
+        }
 
-		update_logic();	
-	}
-	
+        update_logic(); 
+    }
+    
     draw_background();
     draw_world();
     draw_objects();
@@ -147,8 +161,19 @@ void main_menu()
     }
 }
 
+void show_splash()
+{
+    load_pgm("data/splash.pgm", 0xA0000000, SCREEN_WIDTH, SCREEN_HEIGHT);
+}
+
 int main()
 {
     show_splash();
-    start_game();
+    init_game();
+    while(GAME_RUNNING)
+    {
+        main_loop();
+    }
+    show_credits();
+    print_order_info();
 }
