@@ -25,6 +25,8 @@
 #include <conio.h>
 #include <io.h>
 
+#include <vga.h>
+
 #define True 1
 #define False 0
 
@@ -71,7 +73,6 @@ void game_loop()
 		update_logic();	
 	}
 	
-
     draw_background();
     draw_world();
     draw_objects();

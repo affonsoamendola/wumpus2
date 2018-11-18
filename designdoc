@@ -11,3 +11,18 @@ Fofonso's Wumpus Hunt 2: The Hunt for the Wumpus Wizard
 --Each floor is a logic puzzle with only one or two solutions
 --"     "    has a grid like structure, but can have different structures like walls and etc.
 --The solution can be reached by firing one single arrow, 
+
+-Traps 
+-- Laser Turret (Really sensitive, can be destroyed by anything (arrow, other lasers, fire, cold), sh)
+-- Mirrors (Not really traps, deflect lasers by 90 degrees, double sided, can be pushed, and rotated)
+-- Bombs (If ignited, by lasers, or fire, explodes after a few seconds) (Dont know if I really want this in, not really trying to make a Dweep Clone)
+-- Spiked Pits (Can be filled by pushing rocks and other things in them.)
+-- Bottomless Pits (Can NOT be filled, but you can drop things in it to clear them from the game)
+-- Sentries (Moving Bots, patrolling specified areas, heavilly armed, but their ammo ran out long ago by misfiring)
+-- Pressure Plates, Buttons, Laser Receivers (Enable or disable certain traps)
+-- Draw Bridges
+-- Falling Rock Traps
+-- Conveyor Belts
+-- Colored Keys (Cant have a 90s inspired game without keycards right?)
+-- Colored Doors (Consumes a Key, can fuck you up if you open in a different order then expected
+-- I believe that is enough to start it up, should be easy to make 50 puzzles with these elements, Right? 
