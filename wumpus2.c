@@ -54,27 +54,39 @@ int GAME_RUNNING = True;
 int WAS_DIRECTIONAL_PRESSED = False;
 int WHAT_DIRECTIONAL_PRESSED = DIRECTION_UP;
 
-struct Object
+int CURRENT_RES_X;
+int CURRENT_RES_Y;
+
+typedef struct
 {
 	int x;
 	int y;
 	int flags;
-};
+} Object;
 
 Object PLAYER_OBJECT;
+
+void main_loop();
+void game_loop();
+void update_logic();
+
+void init_game();
+void main_menu();
+
+void show_splash();
 
 void main_loop()
 {
     if(CURRENT_GAME_STATE == STATE_GAME)
     {
-        game_loop();
+        //game_loop();
     }
     else if(CURRENT_GAME_STATE == STATE_MAIN_MENU)
     {
         main_menu();
     }
 }
-
+/*
 void game_loop()
 {
     if(ANIM_PLAYING == False)
@@ -83,7 +95,6 @@ void game_loop()
         {
             handle_input();
         }
-
         update_logic(); 
     }
     
@@ -95,10 +106,11 @@ void game_loop()
     handle_audio();
     wait_for_vblank();
 }
-
+*/
+/*
 void update_logic()
 {
-	Object object;
+	Object* object;
 
 	if(WAS_DIRECTIONAL_PRESSED == True)
 	{
@@ -107,14 +119,14 @@ void update_logic()
 
 		if(object != NULL)
 		{
-			if((object.flags & OBJ_PUSHABLE) != 0)
+			if(((*object).flags & OBJ_PUSHABLE) != 0)
 			{
 				//IF OBJECT IS PUSHABLE, BEGIN PUSHING SAID OBJECT
 				start_move_object(object, WHAT_DIRECTIONAL_PRESSED);
 				start_move_object(PLAYER_OBJECT, WHAT_DIRECTIONAL_PRESSED);
 			
 			}
-			else if((object.flags & OBJ_WALL) != 0)
+			else if(((*object).flags & OBJ_WALL) != 0)
 			{
 				//LITERALLY NOTHING HAPPENS, MIGHT ADD A HUMPF NOISE EVENTUALLY, OR A TENTATIVE MOVE.
 			}
@@ -126,19 +138,23 @@ void update_logic()
 		}
 	}	
 }
-
+*/
+/*
 void init_game()
 {
 	PLAYER_OBJECT.x = 0;
 	PLAYER_OBJECT.y = 0;
 	PLAYER_OBJECT.flags |= OBJ_PLAYER;
 }
-
+*/
 void main_menu()
 {
+	/*
     draw_menu_background();
     draw_menu_text();
     handle_input();
+    */
+    /*
     if(enter_pressed)
     {
         if(current_choice == MENU_NEW_GAME)
@@ -159,21 +175,22 @@ void main_menu()
             show_dialog_box(SCREEN_WIDTH/2-200, 400, SCREEN_HEIGHT/2-100, 200, random_exit_message());
         }
     }
+    */
 }
 
 void show_splash()
 {
-    load_pgm("data/splash.pgm", 0xA0000000, SCREEN_WIDTH, SCREEN_HEIGHT);
+    load_pgm("data/splash.pgm", (unsigned char far *)0xA0000000, CURRENT_RES_X, CURRENT_RES_Y);
 }
 
 int main()
 {
     show_splash();
-    init_game();
+    /*init_game();
     while(GAME_RUNNING)
     {
         main_loop();
     }
     show_credits();
-    print_order_info();
+    print_order_info();*/
 }
