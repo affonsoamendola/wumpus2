@@ -8,16 +8,15 @@ CC = tcc
 RM = rm -f
 
 INCLUDE = include;D:\tc\include
-LIB = D:\tc\lib
+LIB = D:\tc\lib;lib
 CCFLAGS = 
 
 all: $(GAMENAME).exe
 
 $(GAMENAME).exe:
-	$(CC) "-I$(INCLUDE) -L$(LIB) -e$(GAMENAME) $(CCFLAGS)"  *.c 
-
+	$(CC) "-I$(INCLUDE) -L$(LIB) -e$(GAMENAME) $(CCFLAGS) *.c *.LIB" 
 run:
 	dosbox -conf ~/.dosbox/tcc.conf -c "$(GAMENAME)"
 
 clean:
-	$(RM) *.OBJ *.EXE *.LOG *.BAT
+	$(RM) *.OBJ *.EXE *.LOG *.BAT *.MAP 

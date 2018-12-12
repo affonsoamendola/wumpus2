@@ -1,7 +1,0 @@
-Turbo C++ Version 3.00 Copyright (c) 1992 Borland International
-wumpus2.c:
-Warning wumpus2.c 196: Function should return a value in function main
-Turbo Link  Version 5.0 Copyright (c) 1992 Borland International
-Error: Undefined symbol _load_pgm in module wumpus2.c
-
-	Available memory 4078952

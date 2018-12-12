@@ -180,13 +180,22 @@ void main_menu()
 
 void show_splash()
 {
-    load_pgm("data/splash.pgm", (unsigned char far *)0xA0000000, CURRENT_RES_X, CURRENT_RES_Y);
+    load_pgm("data/pgm/splash.pgm", (unsigned char far*)0xA0010000L, 216, 124);
+    copy_vmem_to_dbuffer_latched((unsigned char far*)0xA0010000L, (unsigned char far*)0xA0004B00L, 216*124);
+    flip_front_page();
+    getch();
+}
+
+void init_game()
+{
+	set_graphics_mode(GRAPHICS_MODEX);
 }
 
 int main()
 {
+	init_game();
     show_splash();
-    /*init_game();
+    /*
     while(GAME_RUNNING)
     {
         main_loop();
