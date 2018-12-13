@@ -54,9 +54,6 @@ int GAME_RUNNING = True;
 int WAS_DIRECTIONAL_PRESSED = False;
 int WHAT_DIRECTIONAL_PRESSED = DIRECTION_UP;
 
-int CURRENT_RES_X;
-int CURRENT_RES_Y;
-
 typedef struct
 {
 	int x;
@@ -147,11 +144,20 @@ void init_game()
 	PLAYER_OBJECT.flags |= OBJ_PLAYER;
 }
 */
+
+void draw_menu()
+{
+	//DRAW BACKGROUND
+
+	//DRAW STATIC TEXT
+	
+	//DRAW DYNAMIC TEXT
+}
+
 void main_menu()
 {
 	/*
-    draw_menu_background();
-    draw_menu_text();
+    draw_menu();
     handle_input();
     */
     /*
@@ -180,8 +186,10 @@ void main_menu()
 
 void show_splash()
 {
-    load_pgm("data/pgm/splash.pgm", (unsigned char far*)0xA0010000L, 216, 124);
-    copy_vmem_to_dbuffer_latched((unsigned char far*)0xA0010000L, (unsigned char far*)0xA0004B00L, 216*124);
+	draw_message_box( "TESTING THIS SHIET1", 
+					  "TESTING THIS SHIET2", 
+					  "TESTING THIS SHIET3", 
+					  1, 10, 5, 0);
     flip_front_page();
     getch();
 }
