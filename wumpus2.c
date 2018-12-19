@@ -22,6 +22,8 @@
 #include <math.h>
 #include <time.h>
 
+#include <keyb.h>
+
 #include <conio.h>
 #include <io.h>
 
@@ -154,12 +156,13 @@ void draw_menu()
 	//DRAW DYNAMIC TEXT
 }
 
+
 void main_menu()
 {
-	/*
+	
     draw_menu();
     handle_input();
-    */
+    
     /*
     if(enter_pressed)
     {
@@ -186,10 +189,7 @@ void main_menu()
 
 void show_splash()
 {
-	draw_message_box( "TESTING THIS SHIET1", 
-					  "TESTING THIS SHIET2", 
-					  "TESTING THIS SHIET3", 
-					  1, 10, 5, 0);
+
     flip_front_page();
     getch();
 }
